@@ -1,0 +1,53 @@
+
+body {
+    background-color: rgb(71, 177, 177);
+}
+
+
+.main-content {
+    background-color: rgb(255, 244, 231);
+    margin: 10px;
+    padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    
+}
+
+.ticket {
+    width: 15%;
+    height:20%;
+    background-color: #fac5a7;
+    margin: 20px;
+    padding: 10px;
+    align-items: stretch;
+    border-radius: 10px;
+    box-shadow: 5px 12px #5a483e;
+}
+
+.selected-ticket {
+    width: 15%;
+    height:20%;
+    background-color: cadetblue;
+    margin: 20px;
+    padding: 10px;
+    align-items: stretch;
+    border-radius: 10px;
+    box-shadow: 5px 12px rgb(33, 54, 54);
+}
+
+table {
+    margin: 1px;
+    text-align: left;
+    box-sizing: inherit;
+}
+th{
+    padding: 5px;
+}
+td{
+    box-sizing:inherit;
+    padding-bottom: 5px;
+    padding-left: 3px;
+}
+.main-content :hover{
+    background-color: rgb(210, 249, 250);
+}

@@ -1,8 +1,8 @@
-# flight_booking
+# flight_booking 
 
-FrontEnd - React js
-BackEnd - Spring boot
-DataBase - MySQL
+FrontEnd - React js <br/>
+BackEnd - Spring boot <br/>
+DataBase - MySQL <br/>
 
 # Feature
 - [x] Login Registration

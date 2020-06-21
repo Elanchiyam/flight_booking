@@ -2,12 +2,12 @@
 
 FrontEnd - React js <br/>
 BackEnd - Spring boot <br/>
-DataBase - MySQL <br/>
+DataBase - MySQL, Mongo <br/>
 
 # Feature
 - [x] Login Registration
-- [ ] Dashboard
-- [ ] Searching Service
-- [ ] Booking Service
+- [x] Dashboard
+- [x] Searching Service
+- [x] Booking Service
 - [ ] Ticket Generation
-- [ ] Notification Service
+- [x] Notification Service

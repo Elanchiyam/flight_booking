@@ -12,6 +12,8 @@
     "js-cookie": "^2.2.1",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
+    "react-credit-card": "^0.20.0",
+    "react-credit-cards": "^0.8.3",
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",

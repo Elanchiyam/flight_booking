@@ -44,9 +44,7 @@ class Login extends Component{
         }).then(function (res){
             console.log(res.data); 
             // alert("Successfully Logged in");
-            if(res.status === 200){
-                window.location.href="/";
-            }
+            
         }).catch(function (error){
             console.log(error);
         });

@@ -1,8 +1,7 @@
 package com.FlightBookingSystem.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.ui.ModelMap;
@@ -10,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 public class AuthenticationController {
@@ -36,6 +36,7 @@ public class AuthenticationController {
                             rs.getString(2)
                     ));
             if (list.getUserName() != null && list.getPassword() != null) {
+                System.out.println("username :" + list.getUserName() + "Successfully Looged in");
                 return "Successfully Looged in";
             }
             else {

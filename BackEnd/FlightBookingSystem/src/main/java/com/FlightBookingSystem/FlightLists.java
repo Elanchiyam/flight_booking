@@ -10,12 +10,12 @@ class seat_info{
         this.seat_no = seat_no;
         this.status = status;
     }
-};
+}
 
 public class FlightLists {
-    private String flight_number;
-    private String airline;
-    private String seat_availability;
+    private final String flight_number;
+    private final String airline;
+    private final String seat_availability;
     // ArrayList<seat_info> seat_list;
 
     public FlightLists(String flight_number, String airline, String seat_availability) {

@@ -1,0 +1,44 @@
+
+.header {
+    background-color: aquamarine;
+    
+}
+
+.menus {
+    background-color: cornsilk;
+    width: 25%;
+    margin-left: 10px;
+}
+
+.menus a{
+    text-decoration: none;
+    display: block;
+    color: black;
+    padding: 10px;
+    font-size: 20px;
+    border-bottom: 2px solid white;
+}
+
+.menus a:hover{
+    background-color: #fcedb3;
+}
+
+.side-content {
+    background-color: blanchedalmond;
+    width: 75%;
+    margin-right: 10px;
+}
+
+.section {
+    background-color: brown;
+    display: flex;
+    min-height: 96vh;
+}
+
+
+
+.side-box {
+    background-color: #ffffff;
+    height: 100vh;
+    margin: 10px;
+}

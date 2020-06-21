@@ -1,8 +1,9 @@
 package com.FlightBookingSystem.Authentication;
+
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface UserRepository {
-
+@Repository
+public interface UserRepository extends CrudRepository<UserDetails,String> {
 
 }

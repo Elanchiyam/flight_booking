@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class TicketService {
     public static int ticketCount = 3;
-    private static List<TicketDetails> tickets = new ArrayList<>();
+    private static final List<TicketDetails> tickets = new ArrayList<>();
 
     static {
         tickets.add(new TicketDetails(1,"Chennai","Mumbai","12345","700"));

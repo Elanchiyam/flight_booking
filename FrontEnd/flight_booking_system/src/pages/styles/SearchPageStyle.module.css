@@ -1,0 +1,35 @@
+.background{
+    background-color: #e1e295;
+    background-image: url("./resources/images/air-plane3.jpg");
+    min-height: 100vh;
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    
+}
+
+.main-container {
+    
+    min-height: 500px;
+    max-width: 500px;
+    margin: auto;
+    
+}
+
+.Querycontainer {
+    background-color: #e6d3e4;
+    margin: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    z-index: 100;
+}
+
+.from ,.to,.depart, .class ,.adult,.search{
+    margin: 20px;
+}
+
+.memb {
+    width: 20px;
+    box-sizing: border-box;
+}

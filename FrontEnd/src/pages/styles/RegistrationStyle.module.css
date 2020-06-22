@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Fira+Sans:400,500,600,700,800');
+
+* {
+  box-sizing: border-box;
+  
+}
+
+.regDiv{
+    background-color: chocolate;
+    min-height: 100vh;
+    padding-top: 30px;
+}
+.content{
+  padding: 20px;
+  background-color: cornsilk;
+  max-width: 30%;
+  margin: auto;
+  border-radius: 30px;
+  
+}
+.content h1{
+  color: rgb(37, 37, 73);
+  font-weight: bolder;
+}
+
+Form Group{
+  padding: 0px;
+}

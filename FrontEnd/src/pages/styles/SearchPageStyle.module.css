@@ -33,3 +33,11 @@
     width: 20px;
     box-sizing: border-box;
 }
+
+.date{
+    margin-bottom:0;
+}
+
+input#datepicker{
+    width: 91.5%;
+}

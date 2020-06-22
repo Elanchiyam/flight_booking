@@ -1,14 +1,13 @@
 package com.FlightBookingSystem.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+
 
 
 @RestController
@@ -18,16 +17,18 @@ public class AuthenticationController {
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
-    public String retrieveUserDetails(
-            @ModelAttribute("username") UserDetails user,
-            BindingResult result, ModelMap model
-            ){
+//    public String retrieveUserDetails(
+//            @ModelAttribute("username") UserDetails user,
+//            BindingResult result, ModelMap model
+//            ){
+    public String retrieveUserDetails( @RequestParam String username,@RequestParam String password ){
+        System.out.println(username + password);
 
 //            model.addAttribute("username",user.getUserName());
 //            model.addAttribute("password",user.getPassword());
 
         String sql = "SELECT username, password FROM User WHERE username = ? AND password = ?";
-
+        UserDetails user = new UserDetails(username,password);
         System.out.println(user.getUserName() + user.getPassword());
         try {
             UserDetails list = jdbcTemplate.queryForObject(sql, new Object[]{user.getUserName(), user.getPassword()}, (rs, rowNum) ->
@@ -48,6 +49,6 @@ public class AuthenticationController {
 
             return "Service interrupted" + e.toString();
         }
-
+//        return "Sucessfully login";
     }
 }

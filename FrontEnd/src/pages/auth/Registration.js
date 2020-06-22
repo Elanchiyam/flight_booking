@@ -1,5 +1,8 @@
 import React ,{Component} from 'react';
 import Axios from "axios";
+import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import styles from '../styles/RegistrationStyle.module.css';
+import { Link } from "react-router-dom";
 
 class Registration extends Component{
     constructor(props){
@@ -28,7 +31,7 @@ class Registration extends Component{
 
     handleSubmit = (event)=>{
         console.log("Form Submitted");
-       // event.preventDefault();
+        event.preventDefault();
 
         
         Axios.post('http://localhost:8092/auth',{
@@ -36,7 +39,11 @@ class Registration extends Component{
                         email:this.state.email,
                         password:this.state.password
                     }).then(res => {
-                            console.log(res)
+                            console.log(res.data);
+                            const responseMessage = "Sucessfully Registered!!";
+                            this.setState({
+                                responseMessage
+                            })
                         })
                 .catch(error =>{
                     console.log(error)
@@ -48,15 +55,32 @@ class Registration extends Component{
     }
     render(){
         return(
-            <div>
-                <form onSubmit = {this.handleSubmit}>
-                    <input type = "text" placeholder = "Username" name="username" value = {this.state.changeHandler} onChange = {this.changeHandler}/> 
-                    <input type = "text" placeholder = "Email" name = "email" value = {this.state.changeHandler} onChange = {this.changeHandler} />
-                    <input type = "text" placeholder = "Password" name = "password" value = {this.state.changeHandler} onChange = {this.changeHandler} />
-                    <button type = "submit" >Submit</button>
-                </form>
-                <button type = "submit" onClick = {this.display}>Test</button>
-                
+            <div className = {styles.regDiv}>                 
+                 <div className = {styles.content}>
+                        <h3>Sign up</h3>
+                        <Form onSubmit = {this.handleSubmit}>
+                            <Form.Group controlId="formBasicUsername">
+
+                                <Form.Control required  type = "text" placeholder = "Username" name="username" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                                <br/>
+                                <Form.Control required  type="email" placeholder="Enter email" name = "email" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                                <br/>
+                                <Form.Control required  type="password" placeholder="Password"  name = "password" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                            </Form.Group>
+                            <Button variant="primary" type="submit" >
+                                Submit
+                            </Button>
+                        </Form>
+                        <div>
+                            {this.state.responseMessage}
+                            <Link to = {
+                                    { pathname  : '/',
+                                    }
+                            }>Back to home page
+                            </Link>
+                    </div>
+                    </div>
+                    
             </div>
         );
     }

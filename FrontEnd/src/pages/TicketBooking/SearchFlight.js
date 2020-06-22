@@ -3,6 +3,7 @@ import  SearchTicketStyle from '../styles/SearchPageStyle.module.css'
 import Axios from 'axios';
 
 
+
 class SearchFlight extends Component{
     constructor(props){
         super(props);
@@ -150,6 +151,7 @@ class SearchFlight extends Component{
                             <div className={SearchTicketStyle.depart}>
                                 <h3>Depart</h3>
                                 <input type = "date" name = "depart" onChange = {this.changeHandler}/>
+                                {/* <input class="date" id="datepicker2" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required=""></input> */}
                             </div>
                             <div className={SearchTicketStyle.depart}>
                                 <h3>Class</h3>

@@ -15,4 +15,5 @@ public interface FlightRepository extends MongoRepository<FlightInfo,String> {
 
     @Query("{'fare':?0}")
     List<FlightInfo> findByfare(Integer fare);
+
 }

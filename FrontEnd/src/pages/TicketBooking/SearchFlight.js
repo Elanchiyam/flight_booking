@@ -14,10 +14,11 @@ class SearchFlight extends Component{
             from:'',
             to:'',
             depart:'',
-            class:'Economy',
+            classType:'Economy',
             adult: 1,
             child:1,
-            isSelected: false
+            isSelected: false,
+            //  username : this.props.username
         }
     }
     changeHandler = (event) =>{
@@ -56,26 +57,31 @@ class SearchFlight extends Component{
     }
     
 
-    handleBookTicket = (index,flights,count)=>{
+    handleBookTicket = (index,flights,ticketCount)=>{
         console.log(index);
         console.log(flights);
-        console.log(count * flights.fare);
+        console.log(ticketCount * flights.fare);
+        console.log("In Book Flight--->"+this.state.username);
         console.log("Before sending :" + this.state.isSelected);
-        console.log("Flight id:" + flights.id);
-       // console.log("After changing before :" + this.state.isSelected);
+        console.log("Object=====>",flights);
+        console.log("Flight id:" + flights.aircraftCode);
+        const user = this.state.username;
+       console.log("After changing before :" + this.state.isSelected);
         this.props.history.push({
             pathname:"/bookedFlight",
-            state : { airline : flights.airline,
-                      aircraft : flights.aircraft,
-                      from: flights.from,
-                      to: flights.to,
-                      date:flights.date,
-                      count:count,
-                      fare : flights.fare,
-                      totalfare: count * flights.fare,
-                      selected : !this.state.isSelected,
-                      id:flights.id
-                    },
+            // state : { 
+            //             //airline : flights.airline,
+            //           aircraft : flights.aircraftCode,
+            //           //from: flights.from,
+            //         //   to: flights.to,
+            //         //   date:flights.date,
+            //           ticketCount:ticketCount,
+            //         //   fare : flights.fare,
+            //           totalfare: ticketCount * flights.fare,
+            //           selected : !this.state.isSelected,
+            //         //   id:flights.aircraftCode,
+            //            username:this.state.user
+            //         },
             
         });
         
@@ -84,22 +90,22 @@ class SearchFlight extends Component{
     handleSubmit = (event)=>{
         console.log("Form Submitted");
         event.preventDefault();
-        // alert(`${this.state.from} ${this.state.to} ${this.state.depart} ${this.state.class} ${this.state.adult} ${this.state.child}`)
-        const count = this.state.adult + this.state.child;
-        console.log(count);
-        if(count >6){
+        // alert(`${this.state.from} ${this.state.to} ${this.state.depart} ${this.state.classType} ${this.state.adult} ${this.state.child}`)
+        const ticketCount = this.state.adult + this.state.child;
+        console.log(ticketCount);
+        if(ticketCount >6){
             return(
-                alert("Count exceeds 6 members")
+                alert(this.state.username + "ticketCount exceeds 6 members")
                 
             )
         }
     
-            Axios.get('http://localhost:8092/flights/searchFlight',{
+            Axios.get('http://localhost:8092/searchFlightInDB',{
                 params:{
                    from: this.state.from,
                    to: this.state.to,
                    date:this.state.depart,
-                   class:this.state.class,
+                   classType:this.state.classType,
                    adult:this.state.adult,
                    child:this.state.child,
                    
@@ -115,11 +121,13 @@ class SearchFlight extends Component{
                 
                 const flight = flights.map((flights,index) =>(
                     <div  key = {index} className = {SearchTicketStyle.flightBack}>
-                        <h1>airline:  {flights.airline}   aircraft : {flights.aircraft}</h1>
-                        <h2>from : {flights.from} </h2>
-                        <h2>to : {flights.to} </h2>
-                        <h3>Fare : {flights.fare}</h3>
-                        <button  onClick = {()=>this.handleBookTicket(index , flights , count)}>Book Ticket</button>
+                        <div>
+                            <h4>airline:  {flights.airline}   aircraft : {flights.aircraftCode}</h4>
+                            <h4>from : {flights.from} </h4>
+                            <h4>to : {flights.to} </h4>
+                            <h4>Fare : {flights.fare}</h4>
+                        </div>
+                        <button  onClick = {()=>this.handleBookTicket(index , flights , ticketCount)}>Book Ticket</button>
                     </div>
                 ))
                 this.setState({
@@ -135,45 +143,53 @@ class SearchFlight extends Component{
     }
     
     render(){
+
+        console.log("-->Inside Search Flight"+this.state.username);
         return(
             <div >
                 <div  className = {SearchTicketStyle.background}>
-                    <div className={SearchTicketStyle.Query_container}>
-                        <form onSubmit={this.handleSubmit} >
+                    <div className={SearchTicketStyle.QueryContainer}>
+                        <form onSubmit={this.handleSubmit} className={SearchTicketStyle.formContainer} >
                             <div className= {SearchTicketStyle.from}>
                                 <h3>From</h3>
-                                <input type = "text" name = "from" onChange = {this.changeHandler}/>
+                                <input className={SearchTicketStyle.inputCss} placeholder = "Chennai"type = "text" name = "from" onChange = {this.changeHandler}/>
                             </div>
                             <div className={SearchTicketStyle.to}>
                                 <h3>To</h3>
-                                <input type = "text" name = "to" onChange = {this.changeHandler}/>
+                                <input type = "text" name = "to" placeholder = "Bangalore" onChange = {this.changeHandler}/>
                             </div>
-                            <div className={SearchTicketStyle.depart}>
-                                <h3>Depart</h3>
-                                <input type = "date" name = "depart" onChange = {this.changeHandler}/>
-                                {/* <input class="date" id="datepicker2" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required=""></input> */}
-                            </div>
-                            <div className={SearchTicketStyle.depart}>
-                                <h3>Class</h3>
-                                <select value = {this.state.class} name = "class" onChange = {this.changeHandler}>
-                                    <option value ="Economy" >Economy</option>
-                                    <option value ="Premium Economy">Premium Economy</option>
-                                    <option value = "Business">Business</option>
-                                    <option value ="First class">First class</option>
-                                </select>
-                            </div>
-                            <div className={SearchTicketStyle.adult}>
-                                <h3>Adult:(12+ yrs)</h3>
-                                <button className={SearchTicketStyle.decre} type = "button"onClick = {this.AdultCountDecrement}>-</button>
-                                <input  className={SearchTicketStyle.memb} type= "text" value = {this.state.adult} name = "adult"  />
-                                <button  className={SearchTicketStyle.incre} type = "button" onClick = {this.AdultCountIncrement}>+</button>
-                            </div>
-                            
-                            <div className="adult">
-                                <h3>Child:(2-11 yrs)</h3>
-                                <button  className={SearchTicketStyle.decre} type = "button" onClick = {this.ChildCountDecrement}>-</button>
-                                <input  className={SearchTicketStyle.memb}  type= "text" value = {this.state.child} name = "child" />
-                                <button  className={SearchTicketStyle.incre} type = "button" onClick = {this.ChildCountIncrement}>+</button>
+                            <div className = {SearchTicketStyle.foot}>
+                                <div>
+                                    <div className={SearchTicketStyle.depart}>
+                                        <h3>Depart</h3>
+                                        <input type = "date" name = "depart" onChange = {this.changeHandler}/>
+                                        {/* <input class="date" id="datepicker2" name="Text" type="text" value="mm/dd/yyyy" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'mm/dd/yyyy';}" required=""></input> */}
+                                    </div>
+                                    <div className={SearchTicketStyle.classTypeCss}>
+                                        <h3>Class</h3>
+                                        <select value = {this.state.classType} name = "class" onChange = {this.changeHandler}>
+                                            <option value ="Economy" >Economy</option>
+                                            <option value ="Premium Economy">Premium Economy</option>
+                                            <option value = "Business">Business</option>
+                                            <option value ="First class">First class</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div className={SearchTicketStyle.adult}>
+                                        <h3>Adult(12+)</h3>
+                                        <button className={SearchTicketStyle.decre} type = "button"onClick = {this.AdultCountDecrement}>-</button>
+                                        <input  className={SearchTicketStyle.memb} type= "text" value = {this.state.adult} name = "adult"  />
+                                        <button  className={SearchTicketStyle.incre} type = "button" onClick = {this.AdultCountIncrement}>+</button>
+                                    </div>
+                                    
+                                    <div className={SearchTicketStyle.child}>
+                                        <h3>Child(2-11 )</h3>
+                                        <button  className={SearchTicketStyle.decre} type = "button" onClick = {this.ChildCountDecrement}>-</button>
+                                        <input  className={SearchTicketStyle.memb}  type= "text" value = {this.state.child} name = "child" />
+                                        <button  className={SearchTicketStyle.incre} type = "button" onClick = {this.ChildCountIncrement}>+</button>
+                                    </div>
+                                </div>
                             </div>
                             <div className="search">
                                 <button type="submit">Search Flights</button>
@@ -183,7 +199,7 @@ class SearchFlight extends Component{
                 </div>
                 
               <div> 
-                  <h1>Flight will come here</h1> 
+                  {/* <h1>Flight will come here</h1>  */}
                     {this.state.flight}
                </div> 
             </div>

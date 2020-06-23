@@ -1,6 +1,6 @@
 .background{
-    background-color: #e1e295;
-    background-image: url("./resources/images/air-plane3.jpg");
+    background-color: #e7e7d4;
+   
     min-height: 100vh;
     background-attachment: fixed;
     background-position: center;
@@ -14,30 +14,141 @@
     min-height: 500px;
     max-width: 500px;
     margin: auto;
+    display: flex;
     
 }
 
-.Querycontainer {
-    background-color: #e6d3e4;
+.QueryContainer {
+    background-color:rgb(255, 251, 228);
     margin: 20px;
     display: flex;
     flex-wrap: wrap;
     z-index: 100;
+    
 }
 
-.from ,.to,.depart, .class ,.adult,.search{
-    margin: 20px;
+
+
+.from ,.to,.depart, .classTypeCss ,.adult,.search,.child{
+    margin: 10px;
+    display: flex;
+    padding: 10px;
+    
+    
+    
+}
+.classTypeCss{
+    
+    margin: 0px
+}
+.from h3{
+    padding: 10px;
+    margin: 5px;
 }
 
+.to h3{
+    padding: 10px;
+    margin: 15px;
+}
+.classTypeCss h3{
+    padding: 10px;
+    margin: 10px;
+    
+}
+
+.classTypeCss select{
+    
+    padding: px;
+    margin-left: 0px;
+    margin-top: 25px;
+    height: 30px;
+    width: 170px
+}
+
+.from input[type= "text"]{
+    
+    margin: 10px;
+}
+.to input[type= "text"]{
+    
+    margin: 15px;
+}
+
+.depart input[type= "date"]{
+    
+    margin-left: 25px;
+     
+}
 .memb {
     width: 20px;
     box-sizing: border-box;
 }
 
-.date{
+.depart{
     margin-bottom:0;
 }
 
 input#datepicker{
     width: 91.5%;
+}
+
+.inputCss{
+    width: 50%;
+}
+
+
+.adult{
+    
+    text-align: center;
+}
+.adult h3{
+    padding: 10px;
+    margin: 10px;
+    
+}
+.adult button{
+    margin: 0px;
+    font-size: 20px;
+}
+.adult input[type= "text"]{
+    height: 10px;
+    width: 20%;
+    margin: 15px;
+}
+.child button{
+    margin: 0px;
+    
+    font-size: 20px;
+}
+.child input[type= "text"]{
+    height: 10px;
+    width: 20%;
+    margin: 15px;
+}
+.child h3{
+    padding: 10px;
+    margin: 5px;
+    
+}
+
+.foot{
+    display: flex;
+}
+
+.flightBack{
+    background-color: rgba(188, 219, 217, 0.966);
+    max-width: 70%;
+    margin: auto;
+    margin-top: 30px;
+    margin-bottom:40px; 
+    border-radius: 30px;
+    text-align: left;
+    padding: 20px;
+    display: flex;
+}
+.flightBack button{
+    height: 40px;
+    padding: 5px;
+    margin-left: 30px;
+    
 }

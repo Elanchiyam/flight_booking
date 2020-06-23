@@ -1,5 +1,6 @@
 package com.FlightBookingSystem.FlightInventory;
 
+import com.FlightBookingSystem.FlightInventory.AdminFlightService.AdminFlightInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,6 +30,11 @@ public class FlightInfoServiceImplementation implements FlightInfoService{
     @Override
     public List<FlightInfo> findByfare(Integer fare) {
         return flightRepository.findByfare(fare);
+    }
+
+    @Override
+    public void insert(AdminFlightInfo adminFlightInfo) {
+
     }
 
 

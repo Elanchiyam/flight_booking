@@ -9,5 +9,5 @@ DataBase - MySQL, Mongo <br/>
 - [x] Dashboard
 - [x] Searching Service
 - [x] Booking Service
-- [ ] Ticket Generation
+- [x] Ticket Generation
 - [x] Notification Service

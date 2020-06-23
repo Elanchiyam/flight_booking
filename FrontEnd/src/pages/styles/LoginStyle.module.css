@@ -18,6 +18,7 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+    padding: 10px;
     
 }
 
@@ -44,6 +45,9 @@
     justify-content: center;
     align-items: center;
     color: #fff;
+}
+h3{
+    font-size: 20px;
 }
 .rightContent{
     background-color:  #fff;
@@ -78,17 +82,28 @@ button{
     justify-content: center;
     font-family: sans-serif;
     color: #008080;
+    display: flex;
+    
+}
+.heading h1{
+    font-size: 20px;
+    padding: 10px;
+    
+    
+    
 }
 
 .btn {
-    width: 70%;
+    width: 30%;
     border-radius: 30px;
     color: #008080;
     font-weight: 600;
     background-color: #fff;
-    border: 1px solid #008080
+    border: 1px solid #008080;
+    padding:0px;
     
 }
+
 
 .btn:hover, .btn:focus{
     background-color: #008080;
@@ -115,5 +130,8 @@ button{
 .regLink a {
     color: cadetblue;
     text-decoration-line: none;
+}
+.regLink{
+    font-size: 10px;
 }
 

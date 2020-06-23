@@ -54,13 +54,10 @@ export default class Login extends Component{
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.changeHandler = this.changeHandler.bind(this);
+        this.handleTest = this.handleTest.bind(this);
     }
 
-    componentDidMount(){
-        
-        // React.createElement(MyComponent);
 
-    }
     
 
     changeHandler = (event) =>{
@@ -90,24 +87,54 @@ export default class Login extends Component{
             }
         }).then(function (res){
             console.log(res.data); 
-            if(res.status == 200){
-                alert("Successfully Logged in");
+           // if(res.status == 200){
+               // alert("Successfully Logged in");
                 // window.location = `/dashboard?username=${username}&password=${password}`;
                 that.props.history.push({
                     pathname: "/dashboard",
                     state:{
-                        username:username,
-                        password:password
+                        username:that.state.username,
+                        // password:password
                     }
                 })
-            }
+            //}
             
         }).catch(function (error){
-            console.log(error);
+         //   console.log(error);
+            alert("Please Register!!");
         });
         
     }
     
+    handleTest = (event)=>{
+       event.preventDefault();
+
+        Axios.post('http://localhost:8092/flightAdmin',{
+            
+                airline:"Indigo",
+                aircraftCode:"5RT8EF",
+                from:"Mumbai",
+                to:"Calcutta",
+                date:"2020-06-25",
+                fare:2750,
+                totalSeats:100,
+                reservedSeats:15,
+                
+
+            
+            
+            }).then(res => {
+                    console.log(res);
+                    
+                })
+        .catch(error =>{
+            console.log(error)
+            alert("Something wrong in post");
+        
+        })
+    }
+
+
     render(){
 
         return(
@@ -126,7 +153,7 @@ export default class Login extends Component{
                 </div>
                 <div className = {styles.rightContent}>
                     <div className = {styles.heading}>
-                        <h1>Log In</h1>
+                        <h1>Flight Booking System</h1>
                     </div>
 
                     <div>
@@ -135,11 +162,13 @@ export default class Login extends Component{
                             <input required  type = "password" name = "password" placeholder = "Password" value = {this.state.Password} onChange = {this.changeHandler} />
                             <div className={styles.btnMargin}>
                             
-                            <button className = {styles.btn}type = "submit" >Submit</button>
-                            
-                                <div className={styles.regLink}>
-                    <p>Don't have an account? <a href="/registration">Register Here</a></p>
-                </div>
+                                    <button className = {styles.btn}type = "submit" >Submit</button>
+                                    
+                                    <div className={styles.regLink}>
+                                        <p>Don't have an account? <a href="/registration">Register Here</a></p>
+                                    </div>
+
+                                {/* <button className = {styles.btn}type = "submit" onClick = {this.handleTest} >Test</button> */}
                             </div>
                         </form> 
                     </div> 

@@ -10,6 +10,7 @@ function BookedFlightDetails(props){
             pathname:"/creditCard",
             state : {   
                 isSelected : props.location.state.selected,
+                username : props.location.state.username,
                  flightId : props.location.state.id
                     }
         })
@@ -18,16 +19,18 @@ function BookedFlightDetails(props){
     function SelectedTicket(props){
         console.log("In selected ticket");
         // const flightId = props.location.state.id;
-        // const count = props.location.state.count;
+        // const ticketCount = props.location.state.ticketCount;
         // const totalfare  = props.location.state.totalfare;
 
     }
     
     
     const isSelected = props.location.state.selected;
-    const flightId = props.location.state.id;
-    const count = props.location.state.count;
+    const flightId = props.location.state.aircraft;
+    const ticketCount = props.location.state.ticketCount;
     const totalfare = props.location.state.totalfare;
+    const username = props.location.state.username;
+    console.log('--------------------------------->>>'+username);
    if(isSelected){
     console.log("In selected flight:"+isSelected)
     console.log("In selected flight:"+ flightId);
@@ -41,7 +44,7 @@ function BookedFlightDetails(props){
                 <h3>From {props.location.state.from}</h3>
                 <h3>To {props.location.state.to}</h3>
                 <h3>Departure {props.location.state.date}</h3>
-                <h3>No of Tickets {props.location.state.count}</h3>
+                <h3>No of Tickets {props.location.state.ticketCount}</h3>
                 <h3>Fare {props.location.state.fare}</h3>
                 <h3>Total fare {props.location.state.totalfare}</h3>
                 {/* <button onClick = {()=> props.Creditcard}>Continue to proceed</button> */}
@@ -49,9 +52,10 @@ function BookedFlightDetails(props){
                 <Link to = {
                        { pathname  : '/creditCard',
                         state:{
-                            id:flightId,
-                            count:count,
-                            totalfare:totalfare
+                            flightId:flightId,
+                            ticketCount:ticketCount,
+                            totalfare:totalfare,
+                            username:username
                         }}
                     
                 }>Continue to proceed

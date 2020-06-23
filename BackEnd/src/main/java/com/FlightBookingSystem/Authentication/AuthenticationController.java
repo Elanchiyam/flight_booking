@@ -1,6 +1,8 @@
 package com.FlightBookingSystem.Authentication;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 import org.springframework.ui.ModelMap;
@@ -21,7 +23,7 @@ public class AuthenticationController {
 //            @ModelAttribute("username") UserDetails user,
 //            BindingResult result, ModelMap model
 //            ){
-    public String retrieveUserDetails( @RequestParam String username,@RequestParam String password ){
+    public ResponseEntity<?> retrieveUserDetails(@RequestParam String username, @RequestParam String password ){
         System.out.println(username + password);
 
 //            model.addAttribute("username",user.getUserName());
@@ -38,7 +40,7 @@ public class AuthenticationController {
                     ));
             if (list.getUserName() != null && list.getPassword() != null) {
                 System.out.println("username :" + list.getUserName() + "Successfully Looged in");
-                return "Successfully Looged in";
+                return ResponseEntity.noContent().build();
             }
             else {
                 throw new EmptyResultDataAccessException("username :"+user.getUserName());
@@ -47,8 +49,10 @@ public class AuthenticationController {
         catch(Exception e){
             System.out.println("Service interrupted" + e.toString());
 
-            return "Service interrupted" + e.toString();
+            return new ResponseEntity(HttpStatus.BAD_REQUEST);
         }
 //        return "Sucessfully login";
     }
+
+
 }

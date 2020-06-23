@@ -14,7 +14,7 @@ body {
 }
 
 .ticket {
-    width: 15%;
+    width: 50%%;
     height:20%;
     background-color: #fac5a7;
     margin: 20px;
@@ -43,6 +43,7 @@ table {
 th{
     padding: 5px;
 }
+
 td{
     box-sizing:inherit;
     padding-bottom: 5px;

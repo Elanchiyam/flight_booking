@@ -45,19 +45,26 @@ import PropTypes from "prop-types";
   handleSubmit = (event) =>{
     console.log("Payment  Form Submitted");
     const { match, location, history } = this.props
-    const {id , count,totalfare} = this.props.location.state;
-          
-    
-    Axios.post('http://localhost:8092/bookTicket',{
-            id:id,
-            count:count,
-            totalfare:totalfare
+    const {flightId , ticketCount,totalfare,username} = this.props.location.state;
+    console.log("->>>>>>>>>>>>>>>>> "+ username)  ;
+    event.preventDefault();
+    Axios.post('http://localhost:8092/ConfirmTicket',{
+          flightId:flightId,
+          ticketCount:ticketCount,
+          totalfare:totalfare,
+          cvc: this.state.cvc,
+          expiry: this.state.expiry,
+          name: this.state.name,
+          number: this.state.number,
+          userName:username
+
         }).then(res => {
                 console.log(res)
+                alert("Transaction Success "+username);
             })
       .catch(error =>{
         console.log(error)
-        alert("User Name /Email Exist ! Try something new!!!");
+        alert("Transaction Failed");
       
       })
     

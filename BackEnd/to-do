@@ -1,0 +1,55 @@
+Front End
+1. Add axios ( /ticket_history) , on dashboard ReactComponentDidMount()
+1.1  Add "usernme" field from frontend.
+2. UI for admin ( /admin) with flight_inventory.form (/admin_update)
+
+Back End
+1.GET (/ticket_history), get "usernme" field from frontend and use it for search in Mongo DB(ticket_history table).
+2.POST (/ticket_book), after successfull booking update Mondo db( tables - flight inventory, ticket history).
+3.Test notification service after successfull booking.
+4.GET (flight_query), add filters - from, to, date, seats
+5.POST (/ticket_book), add "username/id" from Front End.
+6.Add APIS for admin Mongo DB.
+7.Add details - Total seat, seats reserved, seats available in Flight Inventory of Mongo DB.
+8.Fllow steps in BookingRouteController //
+
+>>
+
+1.GET /login
+    RQT: {username:XXX, pasword: XXX}
+    RSP:
+2.POST /auth
+    RQT: {username:XXX, email:XXX, password:XXX}
+    RSP:
+3.GET /ticketDetails
+    RQT: {username}  NOT Implemented XX
+    RSP:
+4.GET /searchFlight
+    RQT: {from, to, date, class, adult, child}  //Add number of seats, add logic in mongo db/
+    RSP:
+5.POST /bookTicket  => update MongoDB of flight inventory, user ticket history
+   RQT: {id, count, totalfare} // Send credit card details not implemented.
+   RSP:
+     >> Fllow steps
+   ///
+   New APIS
+6. CREATE/// POST /admin_update   ==> update MongoDB
+   RQT: {<flight_inventory_details>}
+   RSP:
+ 6.1 UPDATE//
+
+
+//
+Order of Work:
+1.Finish 6 ( 1, 2)   ----------> Finished
+2.Finish 4 search flight  ------->Finished
+3.Finish 5 book ticket
+4,Finish 3.
+///
+
+
+Final:
+1.BEaturiful UI
+2. API documentation.
+3.Code Refactor, naming conventions.
+//

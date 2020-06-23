@@ -4,7 +4,7 @@
 }
 
 .header {
-    background-color: aquamarine;
+    background-color: rgb(236, 103, 103);
     height: 50px;
     display: flex;
     justify-content: flex-end;
@@ -14,7 +14,8 @@
 }
 
 .header h2{
-    font-size: 20px;
+    font-size: 15px;
+    color: #ffffff;
     text-align: center;
     padding: 5px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -22,9 +23,10 @@
 
 
 .menus {
-    background-color: cornsilk;
+    background-color: rgb(242, 255, 220);
     width: 25%;
     margin-left: 10px;
+    text-align: left;
 }
 
 .menus a{
@@ -37,7 +39,8 @@
 }
 
 .menus a:hover{
-    background-color: #fcedb3;
+    background-color: #f3f2ec;
+    color: crimson;
 }
 
 .sideContent {
@@ -60,3 +63,9 @@
     margin: 10px;
 }
 
+.menu-active {
+    background-color: #f3f2ec;
+    color: crimson;
+  }
+
+  

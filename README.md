@@ -31,5 +31,6 @@ DataBase - MySQL, Mongo <br/>
 ![Alt text](ScreenShots/Dashboard.png?raw=true "DashBoard")
 ![Alt text](ScreenShots/creditCard.png?raw=true "Payment")
 ![Alt text](ScreenShots/viewHistory.png?raw=true "Profile")
+![Alt text](ScreenShots/mailNotification.png?raw=true "Mail")
 
  

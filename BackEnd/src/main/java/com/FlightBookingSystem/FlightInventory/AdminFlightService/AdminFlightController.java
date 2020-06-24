@@ -7,6 +7,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,12 +34,17 @@ public class AdminFlightController {
     @PostMapping ("/flightAdmin")
     ResponseEntity<?> insertFlightInventory(@RequestBody AdminFlightInfo adminFlightInfo ){
 
-        System.out.println(adminFlightInfo.toString());
-        Integer availableSeats = adminFlightInfo.getTotalSeats() - adminFlightInfo.getReservedSeats();
-        AdminFlightInfo newFlight = new AdminFlightInfo(adminFlightInfo.getAirline(),adminFlightInfo.getAircraftCode(),adminFlightInfo.getFrom(),adminFlightInfo.getTo(),adminFlightInfo.getDate(),adminFlightInfo.getFare(),adminFlightInfo.getTotalSeats(),adminFlightInfo.getReservedSeats(),availableSeats);
-       System.out.println(newFlight.toString());
-        adminFlightRepository.save(newFlight);
-        return ResponseEntity.noContent().build();
+        try {
+            System.out.println(adminFlightInfo.toString());
+            Integer availableSeats = adminFlightInfo.getTotalSeats() - adminFlightInfo.getReservedSeats();
+            AdminFlightInfo newFlight = new AdminFlightInfo(adminFlightInfo.getAirline(), adminFlightInfo.getAircraftCode(), adminFlightInfo.getFrom(), adminFlightInfo.getTo(), adminFlightInfo.getDate(), adminFlightInfo.getFare(), adminFlightInfo.getTotalSeats(), adminFlightInfo.getReservedSeats(), availableSeats);
+            System.out.println(newFlight.toString());
+            adminFlightRepository.save(newFlight);
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e){
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
    }
 
 

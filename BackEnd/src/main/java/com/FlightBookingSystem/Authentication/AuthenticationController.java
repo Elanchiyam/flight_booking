@@ -1,5 +1,6 @@
 package com.FlightBookingSystem.Authentication;
 
+import com.FlightBookingSystem.Authent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.*;
 public class AuthenticationController {
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    UserRepository userRepository;
 
     @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/login")
@@ -54,5 +58,28 @@ public class AuthenticationController {
 //        return "Sucessfully login";
     }
 
+
+    public String retrieveEmailDetails( String username){
+        System.out.println("In Authentication Controller email details " + username );
+
+        String sql = "SELECT email FROM User WHERE username = ?";
+        Authent user  = new Authent(username);
+
+        System.out.println("Authent User =================>" + username );
+            Authent list = jdbcTemplate.queryForObject(sql, new Object[]{user.getUsername() }, (rs, rowNum) ->
+                    new Authent(
+                            rs.getString(1)
+
+                    ));
+        System.out.println("Authent User Email =================>" + list.toString() );
+            if (list.getUsername()!= null ) {
+                System.out.println("Notification User Name ------------------->" + list.toString());
+                return list.getUsername();
+            }
+            else {
+                throw new EmptyResultDataAccessException("username :"+user.getUsername());
+            }
+
+    }
 
 }

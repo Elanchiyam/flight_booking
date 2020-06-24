@@ -1,8 +1,7 @@
 import React ,{Component}from 'react';
 import '../styles/TicketHistory.css';
 import Axios from 'axios';
-import { parseJSON } from 'date-fns';
-import {BrowserHistory}from 'react-router';
+
 
 class TicketHistory extends Component{
     constructor(props){

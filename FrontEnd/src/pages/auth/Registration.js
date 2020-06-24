@@ -1,9 +1,9 @@
 import React ,{Component} from 'react';
 import Axios from "axios";
-import { Form, Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
+import { Form, Button, Row, Col } from "react-bootstrap";
 import styles from '../styles/RegistrationStyle.module.css';
 import { Link } from "react-router-dom";
-
+import AdminForm from '../AdminRegisterService/AdminForm';
 class Registration extends Component{
     constructor(props){
         super(props);
@@ -13,9 +13,31 @@ class Registration extends Component{
         this.state = {
             username:'',
             email: '',
-            password:''
+            password:'',
+            user: true,
+            admin:false
         }
+    
+        this._onButtonClick1 = this._onButtonClick1.bind(this);
+        this._onButtonClick2 = this._onButtonClick2.bind(this);
     }
+
+    _onButtonClick1() {
+        this.setState({
+          user: true,
+          admin:false
+          
+        });
+      }
+
+      _onButtonClick2() {
+        this.setState({
+          user: false,
+          admin:true
+          
+        });
+      }
+
     changeHandler = (event) =>{
         this.setState({
             [event.target.name] : event.target.value
@@ -55,31 +77,49 @@ class Registration extends Component{
     }
     render(){
         return(
-            <div className = {styles.regDiv}>                 
+            <div className = {styles.regDiv}>     
+                      
                  <div className = {styles.content}>
-                        <h3>Sign up</h3>
-                        <Form onSubmit = {this.handleSubmit}>
-                            <Form.Group controlId="formBasicUsername">
+                 <h1>SIGN UP</h1>
+                    <div className = {styles.choose}>
+                        <Row>
+                        <Col><button onClick = {this._onButtonClick1} className = {styles.btn}>New User</button>
+                        </Col>
+                        <Col><button onClick = {this._onButtonClick2}className = {styles.btn}>Flight Admin</button>
+                        </Col>
+                        </Row>
+                    </div>  
+                        {this.state.user?
+                                <div>
+                                    <Form onSubmit = {this.handleSubmit}>
+                                        <Form.Group controlId="formBasicUsername">
 
-                                <Form.Control required  type = "text" placeholder = "Username" name="username" value = {this.state.changeHandler} onChange = {this.changeHandler} />
-                                <br/>
-                                <Form.Control required  type="email" placeholder="Enter email" name = "email" value = {this.state.changeHandler} onChange = {this.changeHandler} />
-                                <br/>
-                                <Form.Control required  type="password" placeholder="Password"  name = "password" value = {this.state.changeHandler} onChange = {this.changeHandler} />
-                            </Form.Group>
-                            <Button variant="primary" type="submit" >
-                                Submit
-                            </Button>
-                        </Form>
-                        <div>
-                            {this.state.responseMessage}
-                            <Link to = {
-                                    { pathname  : '/',
-                                    }
-                            }>Back to home page
-                            </Link>
-                    </div>
-                    </div>
+                                            <Form.Control required  type = "text" placeholder = "Username" name="username" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                                            <br/>
+                                            <Form.Control required  type="email" placeholder="Enter email" name = "email" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                                            <br/>
+                                            <Form.Control required  type="password" placeholder="Password"  name = "password" value = {this.state.changeHandler} onChange = {this.changeHandler} />
+                                        </Form.Group>
+                                        <Button variant="primary" type="submit" >
+                                            Submit
+                                        </Button>
+                                    </Form>
+
+                                    <div>
+                                        {this.state.responseMessage}
+                                        <Link to = {
+                                                { pathname  : '/',
+                                                }
+                                        }>Back to home page
+                                        </Link>
+                                    </div>
+                                </div> :
+                        null}
+                        {this.state.admin?<AdminForm /> : null}
+
+                         
+                        
+                </div>
                     
             </div>
         );

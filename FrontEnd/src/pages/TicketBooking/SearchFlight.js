@@ -18,6 +18,7 @@ class SearchFlight extends Component{
             adult: 1,
             child:1,
             isSelected: false,
+            
             //  username : this.props.username
         }
     }
@@ -57,7 +58,7 @@ class SearchFlight extends Component{
     }
     
 
-    handleBookTicket = (index,flights,ticketCount)=>{
+    handleBookTicket = (index,flights,ticketCount,props)=>{
         console.log(index);
         console.log(flights);
         console.log(ticketCount * flights.fare);
@@ -65,25 +66,36 @@ class SearchFlight extends Component{
         console.log("Before sending :" + this.state.isSelected);
         console.log("Object=====>",flights);
         console.log("Flight id:" + flights.aircraftCode);
-        const user = this.state.username;
-       console.log("After changing before :" + this.state.isSelected);
+        // const user = this.state.username;
+       console.log("After changing before :" +! this.state.isSelected);
+       const {username} = this.props
+       console.log("In handle book ==>>>"+username);
+       console.log("In handle book ==>>> aircraftCode"+flights.aircraftCode);
+       console.log("In handle book ==>>> ticketCount"+ticketCount);
+       console.log("In handle book ==>>>total fare"+ticketCount * flights.fare);
+       console.log("In handle book ==>>>selected"+!this.state.selected);
+       this.setState({
+           isSelected:!this.state.isSelected
+       })
+       console.log("In handle book ==>>>selected"+!this.state.selected);
         this.props.history.push({
             pathname:"/bookedFlight",
-            // state : { 
-            //             //airline : flights.airline,
-            //           aircraft : flights.aircraftCode,
-            //           //from: flights.from,
-            //         //   to: flights.to,
-            //         //   date:flights.date,
-            //           ticketCount:ticketCount,
-            //         //   fare : flights.fare,
-            //           totalfare: ticketCount * flights.fare,
-            //           selected : !this.state.isSelected,
-            //         //   id:flights.aircraftCode,
-            //            username:this.state.user
-            //         },
+            state : { 
+                        //airline : flights.airline,
+                      aircraft : flights.aircraftCode,
+                      //from: flights.from,
+                    //   to: flights.to,
+                    //   date:flights.date,
+                      ticketCount:ticketCount,
+                    //   fare : flights.fare,
+                      totalfare: ticketCount * flights.fare,
+                      selected : !this.state.isSelected,
+                    //   id:flights.aircraftCode,
+                       username:username
+                    },
             
         });
+        
         
     }
 
@@ -127,7 +139,8 @@ class SearchFlight extends Component{
                             <h4>to : {flights.to} </h4>
                             <h4>Fare : {flights.fare}</h4>
                         </div>
-                        <button  onClick = {()=>this.handleBookTicket(index , flights , ticketCount)}>Book Ticket</button>
+                        {/* <button  onClick = {()=>this.handleBookTicket(index , flights , ticketCount ,this.props)}>Book Ticket</button> */}
+                        <button  onClick = {()=>this.props._onButtonClick(!this.state.isSelected,flights,ticketCount,ticketCount * flights.fare)}>Book Ticket</button>
                     </div>
                 ))
                 this.setState({
@@ -143,10 +156,11 @@ class SearchFlight extends Component{
     }
     
     render(){
-
-        console.log("-->Inside Search Flight"+this.state.username);
+        
+        const {username} = this.props
+        console.log("-->Inside Search Flight"+username);
         return(
-            <div >
+               <div >         
                 <div  className = {SearchTicketStyle.background}>
                     <div className={SearchTicketStyle.QueryContainer}>
                         <form onSubmit={this.handleSubmit} className={SearchTicketStyle.formContainer} >

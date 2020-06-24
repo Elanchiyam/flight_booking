@@ -1,5 +1,6 @@
 package com.FlightBookingSystem.NotificationService;
 
+import com.FlightBookingSystem.TicketHistory.TicketHistoryDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,11 +14,15 @@ public class EmailService {
     @Autowired
     private SimpleMailMessage preConfiguredMessage;
 
-    public void sendMail(String to,String subject,String body){
+    public void sendMail(String to, String subject, TicketHistoryDetails ticketHistoryDetails){
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("mnoelanchiyam1322000@gmail.com");
         message.setTo(to);
         message.setSubject(subject);
+        String body = "Hi " + ticketHistoryDetails.getUserName() + "\n"
+                + "Your Ticket Details" + "\n"
+                +" From :" + ticketHistoryDetails.getTicketHistoryDetails();
+
         message.setText(body);
         mailSender.send(message);
     }

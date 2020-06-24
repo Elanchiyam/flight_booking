@@ -1,8 +1,10 @@
 package com.FlightBookingSystem.BookTicket;
 
 
+import com.FlightBookingSystem.Authentication.AuthenticationController;
 import com.FlightBookingSystem.FlightInventory.AdminFlightService.AdminFlightInfo;
 import com.FlightBookingSystem.FlightInventory.AdminFlightService.AdminFlightRepository;
+import com.FlightBookingSystem.NotificationService.NotificationRouteController;
 import com.FlightBookingSystem.TicketHistory.TicketDetails;
 import com.FlightBookingSystem.TicketHistory.TicketHistoryDetails;
 import com.FlightBookingSystem.TicketHistory.TicketRepository;
@@ -20,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.locks.ReentrantLock;
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000")
@@ -71,24 +74,39 @@ public class BookingRouteController {
     @Autowired
     TicketRepository ticketRepository;
 
+    @Autowired
+    NotificationRouteController notificationRouteController;
+
+    @Autowired
+    AuthenticationController authenticationController;
+
+
     @PostMapping("/ConfirmTicket")
-    ResponseEntity<?>  ConfirmFlightTicket(@RequestBody BookedTicketDetails bookedTicketDetails){
+    public ResponseEntity<?>  ConfirmFlightTicket(@RequestBody BookedTicketDetails bookedTicketDetails){
+
+        //Sequence the user Request
+        ReentrantLock mutex = new ReentrantLock();
+        mutex.lock();
+
+
 
         try {
             //Check credit card
             CreditCardDetails cardDetails = new CreditCardDetails(bookedTicketDetails.getCvc() , bookedTicketDetails.getExpiry() , bookedTicketDetails.getName() , bookedTicketDetails.getNumber());
             System.out.println("Credit Card Details============>" + cardDetails);
             if(cardDetails.getCvc()==null  || cardDetails.getExpiry() == null || cardDetails.getName()==null || cardDetails.getNumber() == null){
+               mutex.unlock();
                 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
             }
 
             //get Flight Details
             AdminFlightInfo flight = adminFlightRepository.getFlightById(bookedTicketDetails.getFlightId());
-            System.out.println(flight.toString());
+            System.out.println("====================>"+flight.toString());
             //get ticket count
             Integer totalCount = bookedTicketDetails.getTicketCount();
             //check for available seats
             if(flight.getAvailableSeats() < totalCount){
+                mutex.unlock();
                 return new ResponseEntity<>(HttpStatus.BAD_GATEWAY);
             }
             //update reserved seats
@@ -114,19 +132,24 @@ public class BookingRouteController {
             TicketHistoryDetails historyDetails = new TicketHistoryDetails(bookedTicketDetails.getUserName(),ticketDetails);
             System.out.println("ticket History detail =====>" +historyDetails.toString());
 
-            String userName = bookedTicketDetails.getUserName();
-            //get user db
-            TicketHistoryDetails exUser = ticketRepository.getFlightById(userName);
-            System.out.println("Existing user" + exUser);
+//            String userName = bookedTicketDetails.getUserName();
+//            //get user db
+//            TicketHistoryDetails exUser = ticketRepository.getFlightById(userName);
+//            System.out.println("Existing user" + exUser);
 
             //update user db
             ticketRepository.save(historyDetails);
 
+            //email
+            String email = authenticationController.retrieveEmailDetails(bookedTicketDetails.getUserName());
+            //send Notification to User
+            notificationRouteController.sendEmailNotification(email,historyDetails);
 
-
+            mutex.unlock();
             return ResponseEntity.noContent().build();
         }
         catch (Exception e) {
+            mutex.unlock();
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }

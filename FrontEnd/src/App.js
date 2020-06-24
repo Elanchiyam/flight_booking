@@ -12,6 +12,7 @@ import DashBoard from './pages/DashBoard/index';
 import SearchFlight from './pages/TicketBooking/SearchFlight';
 import BookedFlightDetails from './pages/PaymentService/BookedFlightDetails';
 import PaymentForm from './pages/PaymentService/PaymentForm';
+import  AdminFormComponent from './pages/AdminRegisterService/AdminForm';
 
 function App() {
   return (
@@ -26,7 +27,9 @@ function App() {
             <Route exact path = {"/search"} component = {SearchFlight} />
             <Route exact path = {"/bookedFlight"} component = {BookedFlightDetails}/>
             <Route exact path = {"/creditCard"} component = {PaymentForm} />
+            <Route exact path = {"/flightAdmin"} component = {AdminFormComponent} />
           </Switch>
+          
         </Router>
     </div>
   );

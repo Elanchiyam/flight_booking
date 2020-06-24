@@ -1,6 +1,11 @@
 package com.FlightBookingSystem;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+
 public class Authent {
+    @GeneratedValue
+    @Column(name = "username")
     private String username;
     private String email;
     private String password;
@@ -12,6 +17,12 @@ public class Authent {
     }
     public Authent(){
     }
+
+    public Authent(String username) {
+        this.username = username;
+    }
+
+
 
     @Override
     public String toString() {

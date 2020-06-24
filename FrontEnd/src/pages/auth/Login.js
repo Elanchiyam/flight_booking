@@ -35,7 +35,7 @@ export  class MyComponent extends Component{
         return(
             <div>
             
-            <Button variant = "secondary" className = "float-right"onClick = {this.addNotification}>site info</Button>
+            <Button variant = "secondary" className = "float-right"onMouseEnter = {this.addNotification}>site info</Button>
             <NotificationSystem ref = {this.notificationSystem}/>
              </div>
         );
@@ -70,8 +70,7 @@ export default class Login extends Component{
     handleSubmit = async (event)=>{
         console.log("Form Submitted");
         
-        const username = this.state.username;
-        const password = this.state.password;
+       
         
 
         event.preventDefault();

@@ -2,9 +2,9 @@ import React , {Component} from 'react';
 import Cards from 'react-credit-cards';
 import 'react-credit-cards/es/styles-compiled.css';
 import Axios from 'axios';
-import {Link, useLocation} from "react-router-dom";
+
 import {withRouter} from 'react-router-dom';
-import PropTypes from "prop-types";
+
 
  class PaymentForm extends Component {
 
@@ -20,17 +20,7 @@ import PropTypes from "prop-types";
     };
     
   }
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
-  }
-  
-  // componentDidMount(){
-  //     let location = useLocation();
-  //     console.log(location);
-  //     console.log("In card" +location.isSelected);
-  // }
+ 
   
   handleInputFocus = (e) => {
     this.setState({ focus: e.target.name });
@@ -44,12 +34,13 @@ import PropTypes from "prop-types";
 
   handleSubmit = (event) =>{
     console.log("Payment  Form Submitted");
-    const { match, location, history } = this.props
-    const {flightId , ticketCount,totalfare,username} = this.props.location.state;
-    console.log("->>>>>>>>>>>>>>>>> "+ username)  ;
+   
+   const {username ,flights,ticketCount,totalfare} = this.props
+   console.log("In Payment Form---------------->" +username);
+    // console.log("->>>>>>>>>>>>>>>>> "+ isSelected)  ;
     event.preventDefault();
     Axios.post('http://localhost:8092/ConfirmTicket',{
-          flightId:flightId,
+          flightId:flights.aircraftCode,
           ticketCount:ticketCount,
           totalfare:totalfare,
           cvc: this.state.cvc,
@@ -73,6 +64,11 @@ import PropTypes from "prop-types";
   render() {
     // const { match, location, history } = this.props
     // console.log(match.params.id);
+    // const {username , isSelected,flights,ticketCount,totalfare} = this.props
+    // console.log("Inside Payment Component "+username+isSelected+flights.aircraftCode + " --"+ticketCount+ " -->"+totalfare);
+    
+    const {username} = this.props
+    console.log("-->Inside Payment Flight"+username);
     return (
       <div id="PaymentForm">
       {/* <h1>You are at {location.pathname} {this.props.location.state.id} </h1> */}
@@ -113,7 +109,7 @@ import PropTypes from "prop-types";
             onChange={this.handleInputChange}
             onFocus={this.handleInputFocus}
           />
-          <button type = "submit">Submit</button>
+          <button type = "submit" >Submit</button>
         </form>
       </div>
     );

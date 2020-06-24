@@ -12,7 +12,7 @@ public class EmailConfig {
         message.setTo("elanchiyama.17cse@kongu.edu");
         message.setFrom("elanchiyam1322000@gmail.com");
         message.setSubject("Flight Ticket ");
-        message.setText("Your Ticket:(");
+        message.setText("Your Ticket ");
         return message;
     }
 }

@@ -42,6 +42,7 @@ Design and Implement a Flight Booking System. Requirements below.
 
 # Screen shots
 
+![Alt text](ScreenShots/blockDiagram.png?raw=true "Block")
 ![Alt text](ScreenShots/login.png?raw=true "Login")
 ![Alt text](ScreenShots/Dashboard.png?raw=true "DashBoard")
 ![Alt text](ScreenShots/creditCard.png?raw=true "Payment")

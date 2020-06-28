@@ -115,6 +115,10 @@ public class BookingRouteController {
             System.out.println(bookedTicketDetails.getTicketCount());
             flight.setAvailableSeats(flight.getAvailableSeats() - totalCount );
 
+            //generate booked seats
+            int seatCount_start = flight.getReservedSeats() + 1;
+            int seatCount_end = seatCount_start + totalCount -1 ;
+
             //update Flight Inventry
             System.out.println(flight.toString());
             adminFlightRepository.save(flight);
@@ -126,7 +130,7 @@ public class BookingRouteController {
             System.out.println(uuid);
 
             //Generate Ticket details to be updated in User Ticket history
-            TicketDetails ticketDetails = new TicketDetails(uuid,flight.getFrom(),flight.getTo(),flight.getDate(),flight.getAirline(),flight.getAircraftCode(),totalCount,totalFare);
+            TicketDetails ticketDetails = new TicketDetails(uuid,flight.getFrom(),flight.getTo(),flight.getDate(),flight.getAirline(),flight.getAircraftCode(),totalCount,totalFare,seatCount_start,seatCount_end);
             System.out.println(ticketDetails);
 
             //create object for ticket history

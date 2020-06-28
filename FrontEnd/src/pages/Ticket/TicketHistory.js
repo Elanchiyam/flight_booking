@@ -70,6 +70,10 @@ class TicketHistory extends Component{
                                 <th>No of Tickets</th>
                                 <td>{ticket.ticketHistoryDetails.ticketCount}</td>
                             </tr> 
+                            <tr> 
+                                <th>Seat Number</th>
+                                <td>{ticket.ticketHistoryDetails.seatCount_start} - {ticket.ticketHistoryDetails.seatCount_end} </td>
+                            </tr> 
                             <tr>
                                 <th>Total Fare</th>
                                 <td>{ticket.ticketHistoryDetails.fare}</td>

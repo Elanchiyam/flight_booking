@@ -16,8 +16,10 @@ public class TicketDetails {
     private String aircraft;
     private Integer ticketCount;
     private Integer fare ;
+    private Integer seatCount_start;
+    private Integer seatCount_end;
 
-    public TicketDetails(UUID pnrNo, String from, String to, Date date, String airline, String aircraft, Integer ticketCount, Integer fare) {
+    public TicketDetails(UUID pnrNo, String from, String to, Date date, String airline, String aircraft, Integer ticketCount, Integer fare, Integer seatCount_start, Integer seatCount_end) {
         this.pnrNo = pnrNo;
         this.from = from;
         this.to = to;
@@ -26,6 +28,8 @@ public class TicketDetails {
         this.aircraft = aircraft;
         this.ticketCount = ticketCount;
         this.fare = fare;
+        this.seatCount_start = seatCount_start;
+        this.seatCount_end = seatCount_end;
     }
 
     public UUID getPnrNo() {
@@ -92,17 +96,35 @@ public class TicketDetails {
         this.fare = fare;
     }
 
+    public Integer getSeatCount_start() {
+        return seatCount_start;
+    }
+
+    public void setSeatCount_start(Integer seatCount_start) {
+        this.seatCount_start = seatCount_start;
+    }
+
+    public Integer getSeatCount_end() {
+        return seatCount_end;
+    }
+
+    public void setSeatCount_end(Integer seatCount_end) {
+        this.seatCount_end = seatCount_end;
+    }
+
     @Override
     public String toString() {
         return "TicketDetails{" +
-                "pnrNo='" + pnrNo + '\'' +
+                "pnrNo=" + pnrNo +
                 ", from='" + from + '\'' +
                 ", to='" + to + '\'' +
-                ", date='" + date + '\'' +
+                ", date=" + date +
                 ", airline='" + airline + '\'' +
                 ", aircraft='" + aircraft + '\'' +
-                ", ticketCount='" + ticketCount + '\'' +
-                ", fare='" + fare + '\'' +
+                ", ticketCount=" + ticketCount +
+                ", fare=" + fare +
+                ", seatCount_start=" + seatCount_start +
+                ", seatCount_end=" + seatCount_end +
                 '}';
     }
 }

@@ -43,7 +43,7 @@ public class AuthenticationController {
                             rs.getString(2)
                     ));
             if (list.getUserName() != null && list.getPassword() != null) {
-                System.out.println("username :" + list.getUserName() + "Successfully Looged in");
+                System.out.println("username :" + list.getUserName() + "Successfully Logged in");
                 return ResponseEntity.noContent().build();
             }
             else {

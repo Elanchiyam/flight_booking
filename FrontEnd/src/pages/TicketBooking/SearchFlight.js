@@ -105,9 +105,10 @@ class SearchFlight extends Component{
         // alert(`${this.state.from} ${this.state.to} ${this.state.depart} ${this.state.classType} ${this.state.adult} ${this.state.child}`)
         const ticketCount = this.state.adult + this.state.child;
         console.log(ticketCount);
+        const {username} = this.props
         if(ticketCount >6){
             return(
-                alert(this.state.username + "ticketCount exceeds 6 members")
+                alert(username + "  ticketCount exceeds 6 members")
                 
             )
         }
@@ -130,9 +131,13 @@ class SearchFlight extends Component{
             }).then(res => {
                 console.log(res.data); 
                 const flights = res.data;
+                if(res.data.length == 0){
+                    alert("No flights Available");
+                }
                 
                 const flight = flights.map((flights,index) =>(
                     <div  key = {index} className = {SearchTicketStyle.flightBack}>
+                    
                         <div>
                             <h4>airline:  {flights.airline}   aircraft : {flights.aircraftCode}</h4>
                             <h4>from : {flights.from} </h4>
@@ -181,7 +186,7 @@ class SearchFlight extends Component{
                                     </div>
                                     <div className={SearchTicketStyle.classTypeCss}>
                                         <h3>Class</h3>
-                                        <select value = {this.state.classType} name = "class" onChange = {this.changeHandler}>
+                                        <select value = {this.state.classType} name = "classType" onChange = {this.changeHandler}>
                                             <option value ="Economy" >Economy</option>
                                             <option value ="Premium Economy">Premium Economy</option>
                                             <option value = "Business">Business</option>

@@ -14,7 +14,7 @@ function BookedFlightDetails(props){
     console.log("In selected flight:"+ flights.aircraftCode);
         return(
             <div>
-                <h1>Available Flights</h1>
+                <h1>Selected Flights</h1>
                 <div className={styles.mainContainer}> 
                 
                 <h2>Air Asia {flights.ticketCount} </h2>

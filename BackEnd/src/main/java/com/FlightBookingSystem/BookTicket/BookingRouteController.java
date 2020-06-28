@@ -80,12 +80,13 @@ public class BookingRouteController {
     @Autowired
     AuthenticationController authenticationController;
 
+    //Sequence the user Request
+    ReentrantLock mutex = new ReentrantLock();
+
 
     @PostMapping("/ConfirmTicket")
     public ResponseEntity<?>  ConfirmFlightTicket(@RequestBody BookedTicketDetails bookedTicketDetails){
 
-        //Sequence the user Request
-        ReentrantLock mutex = new ReentrantLock();
         mutex.lock();
 
 
